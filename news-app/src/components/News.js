@@ -25,7 +25,7 @@ export class News extends Component {
       loading: true,
     });
     const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=8c5e5ec518bc4fe29c8f9469a9bd9d1c&page=${this.state.page}&pageSize=${this.props.pageSize}`
+      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.newsapi}&page=${this.state.page}&pageSize=${this.props.pageSize}`
     );
     this.props.setProgress(30)
     const json = await response.json();
@@ -61,7 +61,7 @@ export class News extends Component {
       page: this.state.page + 1,
     });
     const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=8c5e5ec518bc4fe29c8f9469a9bd9d1c&page=${this.state.page}&pageSize=${this.props.pageSize}`
+      `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.newsapi}&page=${this.state.page}&pageSize=${this.props.pageSize}`
     );
     const json = await response.json();
     this.setState({

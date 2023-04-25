@@ -16,6 +16,7 @@ export default class App extends Component {
     this.setState({progress:progress})
   }
 
+  newsapi="8c5e5ec518bc4fe29c8f9469a9bd9d1c"
   render() {
     let pageSize = 6;
     let country="us";
@@ -32,15 +33,15 @@ export default class App extends Component {
       />
           <Routes>
                 
-            <Route exact  path="/" element={<News  setProgress={this.setProgress}  key="general"  category="general" pageSize={pageSize} country={country}/>} />
-            <Route exact  path="/general" element={<News  setProgress={this.setProgress}  key="general"  category="general" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/science" element={<News  setProgress={this.setProgress}  key="science"  category="science" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/technology" element={<News  setProgress={this.setProgress}  key="technology" category="technology" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/sports" element={<News  setProgress={this.setProgress} key="sports" category="sports" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/health" element={<News  setProgress={this.setProgress} key="health" category="health" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/general" element={<News  setProgress={this.setProgress} key="general" category="general" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/entertainment" element={<News  setProgress={this.setProgress} key="entertainment" category="entertainment" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/business" element={<News  setProgress={this.setProgress} key="business" category="business" pageSize={pageSize} country={country}/>} />
+            <Route exact  path="/" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="general"  category="general" pageSize={pageSize} country={country}/>} />
+            <Route exact  path="/general" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="general"  category="general" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/science" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="science"  category="science" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/technology" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="technology" category="technology" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/sports" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="sports" category="sports" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/health" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="health" category="health" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/general" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="general" category="general" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/entertainment" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="entertainment" category="entertainment" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/business" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="business" category="business" pageSize={pageSize} country={country}/>} />
               
           </Routes>
         </Router>
