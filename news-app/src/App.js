@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
  import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -8,16 +8,11 @@ import News from "./components/News";
 
 
 
-export default class App extends Component {
-  state={
-    progress:0
-  }
-  setProgress=(progress)=>{
-    this.setState({progress:progress})
-  }
+const App =()=> {
 
-  newsapi="8c5e5ec518bc4fe29c8f9469a9bd9d1c"
-  render() {
+  const [progress, setprogress] = useState(0)
+  let newsapi="8c5e5ec518bc4fe29c8f9469a9bd9d1c"
+ 
     let pageSize = 6;
     let country="us";
 
@@ -28,20 +23,20 @@ export default class App extends Component {
         <Navbar />
         <LoadingBar
         color='#f11946'
-        progress={this.state.progress}
+        progress={progress}
         height={4}
       />
           <Routes>
                 
-            <Route exact  path="/" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="general"  category="general" pageSize={pageSize} country={country}/>} />
-            <Route exact  path="/general" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="general"  category="general" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/science" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="science"  category="science" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/technology" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="technology" category="technology" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/sports" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="sports" category="sports" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/health" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="health" category="health" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/general" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="general" category="general" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/entertainment" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="entertainment" category="entertainment" pageSize={pageSize} country={country}/>} />
-            <Route exact path="/business" element={<News  setProgress={this.setProgress} newsapi={this.newsapi} key="business" category="business" pageSize={pageSize} country={country}/>} />
+            <Route exact  path="/" element={<News  setProgress={setprogress} newsapi={newsapi} key="general"  category="general" pageSize={pageSize} country={country}/>} />
+            <Route exact  path="/general" element={<News  setProgress={setprogress} newsapi={newsapi} key="general"  category="general" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/science" element={<News  setProgress={setprogress} newsapi={newsapi} key="science"  category="science" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/technology" element={<News  setProgress={setprogress} newsapi={newsapi} key="technology" category="technology" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/sports" element={<News  setProgress={setprogress} newsapi={newsapi} key="sports" category="sports" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/health" element={<News  setProgress={setprogress} newsapi={newsapi} key="health" category="health" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/general" element={<News  setProgress={setprogress} newsapi={newsapi} key="general" category="general" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/entertainment" element={<News  setProgress={setprogress} newsapi={newsapi} key="entertainment" category="entertainment" pageSize={pageSize} country={country}/>} />
+            <Route exact path="/business" element={<News  setProgress={setprogress} newsapi={newsapi} key="business" category="business" pageSize={pageSize} country={country}/>} />
               
           </Routes>
         </Router>
@@ -49,5 +44,6 @@ export default class App extends Component {
         
       </div>
     );
-  }
+  
 }
+export default App;

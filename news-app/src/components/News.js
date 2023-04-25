@@ -74,8 +74,7 @@
 //   render() {
 //     return (
 //       <>
-      
-        
+
 //           <h1 className="d-flex justify-content-center">
 //             NewsMonkey - Top {this.capitalizeFirstLetter(props.category)}{" "}
 //             Headlines
@@ -87,7 +86,7 @@
 //             next={this.fetchMoreData}
 //             hasMore={this.state.articles.length!==this.state.totalResults}
 //             loader={<Spinner/>}
-            
+
 //           >
 //            <div className="container">
 //            <div className="row">
@@ -109,10 +108,8 @@
 //           </div>
 //            </div>
 
-
 //           </InfiniteScroll>
 
-        
 //           {/* <div class="d-flex justify-content-between">
 //             <button
 //               type="button"
@@ -135,8 +132,7 @@
 //               Next &rarr;
 //             </button>
 //           </div> */}
-        
-      
+
 //       </>
 //     );
 //   }
@@ -144,84 +140,70 @@
 
 // export default News;
 
-
 import React from "react";
 import NewsItems from "./NewsItems";
 import Spinner from "./Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const News =(props)=>{
-  
-  
+const News = (props) => {
   // document.title=`${capitalizeFirstLetter(props.category) } - NewsMonkey`;
-  const [articles, setarticles] = useState([])
-  const [page, setpage] = useState(1)
-  const [totalResults, settotalResults] = useState(0)
-  const [loading, setloading] = useState(false)
+  const [articles, setarticles] = useState([]);
+  const [page, setpage] = useState(1);
+  const [totalResults, settotalResults] = useState(0);
+  const [loading, setloading] = useState(false);
 
- const capitalizeFirstLetter=(string)=> {
+  const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  };
 
-  const updateCode=async() =>{  
-    props.setProgress(10)
+  const updateCode = async () => {
+    props.setProgress(10);
     setloading(true);
     const response = await fetch(
       `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.newsapi}&page=${page}&pageSize=${props.pageSize}`
     );
-    props.setProgress(30)
+    props.setProgress(30);
     const json = await response.json();
-    props.setProgress(70)
-    setarticles(json.articles)
-    settotalResults(json.totalResults)
-    setloading(false)
+    props.setProgress(70);
+    setarticles(json.articles);
+    settotalResults(json.totalResults);
+    setloading(false);
 
-    props.setProgress(100)
-  }
+    props.setProgress(100);
+  };
 
   useEffect(() => {
     updateCode();
-  }, [])
-  
+  }, []);
 
-
-
-
-
- const fetchMoreData=async()=>{
-  
-    setpage(page+1)
+  const fetchMoreData = async () => {
     const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.newsapi}&page=${page}&pageSize=${props.pageSize}`
-    );
+      `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.newsapi}&page=${page+1}&pageSize=${props.pageSize}`
+      );
+      setpage(page + 1);
     const json = await response.json();
-  
-    setarticles(articles.concat(json.articles))
-    settotalResults(json.totalResults)
-    setloading(false)
-  }
 
- 
-    return (
-      <>
-      
-        
-          <h1 className="d-flex justify-content-center">
-            NewsMonkey - Top {capitalizeFirstLetter(props.category)}{" "}
-            Headlines
-          </h1>
-          {loading && <Spinner />}
+    setarticles(articles.concat(json.articles));
+    settotalResults(json.totalResults);
+    setloading(false);
+  };
 
-          <InfiniteScroll
-            dataLength={articles.length}
-            next={fetchMoreData}
-            hasMore={articles.length!==totalResults}
-            loader={<Spinner/>}
-            
-          >
-           <div className="container">
-           <div className="row">
+  return (
+    <>
+      <h1 className="d-flex justify-content-center">
+        NewsMonkey - Top {capitalizeFirstLetter(props.category)} Headlines
+      </h1>
+      {loading && <Spinner />}
+
+      <InfiniteScroll
+        dataLength={articles.length}
+        next={fetchMoreData}
+        hasMore={articles.length !== totalResults}
+        loader={<Spinner />}
+      >
+        <div className="container">
+          <div className="row">
             {articles.map((elements) => {
               return (
                 <div className="col-md-4 my-3">
@@ -238,17 +220,10 @@ const News =(props)=>{
               );
             })}
           </div>
-           </div>
-
-
-          </InfiniteScroll>
-
-
-        
-      
-      </>
-    );
-  
-}
+        </div>
+      </InfiniteScroll>
+    </>
+  );
+};
 
 export default News;
